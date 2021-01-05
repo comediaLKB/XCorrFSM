@@ -20,7 +20,7 @@
 % delta: (NxNxN_diff) mean squared roughness
 % Theta_0: (rad) output scattering angle
 
-function [delta, Theta_0]=ThickDiffuser(L, ls, g, lambda, N, N_diff)
+function [delta, Theta_0]=ThickDiffuser(L, ls, g, lambda,px, N, N_diff)
 
     if nargin==5
         N_diff=10;
@@ -34,7 +34,7 @@ function [delta, Theta_0]=ThickDiffuser(L, ls, g, lambda, N, N_diff)
     end
     
     e = sqrt( L / (N_diff*ls*k^2) );
-    w = sqrt(N_diff/2)*e / Theta_0;
+    w = sqrt(N_diff/2)*e / (px*Theta_0);
     
     for j=1:N_diff
         delta(:,:,j)=ThinDiffuser(e,w,N);
